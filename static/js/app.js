@@ -48,46 +48,79 @@ function buildMetadata(sample) {
 
 }
 
+function sortData(dataset) {
+  var counts = dataset.sample_values;
+  var names = dataset.otu_labels;
+  var otu_ids = dataset.otu_ids;
+  var pie_data = [];
+//put values in an array
+  for (var i = 0; i < counts.length; i++)
+     pie_data.push({'names': names[i], 'counts': counts[i], 'otu_ids': otu_ids[i]});
+//sort
+   pie_data.sort(function(b,a) {
+     return ((a.counts < b.counts) ? -1 : ((a.counts == b.counts) ? 0 : 1));
+   });
+   //put sorted values back in order
+ for (var n = 0; n < pie_data.length; n++) {
+ names[n] = pie_data[n].names;
+ counts[n] = pie_data[n].counts;
+ otu_ids[n] = pie_data[n].otu_ids;
+}
+  sorted_data = [ {"otu_labels":names, "sample_values":counts, "otu_ids":otu_ids}]
+  // console.log(sorted_data)
+  return sorted_data
+}
+
 function buildCharts(sample) {
-var colorway = ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
+
+  // var colorlist = ['#f44242','#f48941','#efcf40','#b8e83e','#56dd3b','#3ad8bb','#3ba5e2','#3956db','#6639db',
+  // '#9f38e0','#da36e2','#93226d','#701339','#510811','#443536','#1c1919']
   // Fetch the sample data for the plots
   var url = `/samples/${sample}`;
   d3.json(url).then(function(response) {
-    console.log(response)
-    // @TODO: Build a Bubble Chart using the sample data
+    var chart_data = sortData(response);
+    console.log("Sorted data", chart_data[0]);
+/*=========Build a bubble plot ==============*/
     var trace1 = {
       x: response.otu_ids,
       y: response.sample_values,
       text: response.otu_labels,
       marker:{
-        size:response.sample_values,
-      color:colorway},
-      mode: "markers"
+        size: response.sample_values,
+        color: response.otu_ids
+      },
+      mode: "markers",
     };
     var data1 = [trace1];
-
     var layout1 = {
-      title: 'Belly Button Bubble',
-      showlegend: false,
-      height: 800,
-      width: 1000
+      title: 'Sample bacterial population',
+      showlegend: true,
+      autosize: true,
+      // colorway: colorlist
     };
 
-    Plotly.newPlot('bubble', data1, layout1);
+    Plotly.react('bubble', data1, layout1);
+    /*    ========Build a Pie Chart======== */
+      var pie_values = chart_data[0].sample_values.slice(0,10);
+      var pie_ids = chart_data[0].otu_ids.slice(0,10);
+      var pie_labels = chart_data[0].otu_labels.slice(0,10);
+      console.log(pie_values);
+      var data = [{
+        values:pie_values,
+        labels: pie_ids,
+        hovertext: pie_labels,
+        "type":"pie"
+        }]
 
-    // ========Build a Pie Chart========
-  var data = [{
-    values:response.sample_values.slice(0,10),
-    labels:response.otu_labels.slice(0,10),
-    "type":"pie"
-    }]
+      var layout = {
+        title:"Top 10 bacterial species",
+        showlegend:true,
+        // hoverdistance:10,
+        // colorway:colorlist
+      };
 
-  var layout = {
-    showlegend:false
-  };
-
-  Plotly.plot("pie", data, layout);
-  //==============END PIE ==============
+      Plotly.react("pie", data, layout);
+    /*  ==============END PIE ============== */
   });
 }
 
@@ -112,6 +145,7 @@ function init() {
 }
 
 function optionChanged(newSample) {
+
   // Fetch new data each time a new sample is selected
   buildCharts(newSample);
   buildMetadata(newSample);
