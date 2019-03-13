@@ -39,12 +39,11 @@ function buildMetadata(sample) {
         }
       var line = meta.append("li");
         line.text(`${key} : ${value}`);
-      // }); //end of forEach 2
-    }); //end of forEach 1
-
-      });
+    }); //end of forEach
     // BONUS: Build the Gauge Chart
-    // buildGauge(data.WFREQ);
+    buildGauge(response.WFREQ);
+      });
+
 
 }
 
@@ -73,8 +72,8 @@ function sortData(dataset) {
 
 function buildCharts(sample) {
 
-  // var colorlist = ['#f44242','#f48941','#efcf40','#b8e83e','#56dd3b','#3ad8bb','#3ba5e2','#3956db','#6639db',
-  // '#9f38e0','#da36e2','#93226d','#701339','#510811','#443536','#1c1919']
+  var colorlist = ['#f44242','#f48941','#efcf40','#b8e83e','#56dd3b','#3ad8bb','#3ba5e2','#3956db','#6639db',
+  '#9f38e0','#da36e2','#93226d','#701339','#510811','#443536','#1c1919']
   // Fetch the sample data for the plots
   var url = `/samples/${sample}`;
   d3.json(url).then(function(response) {
@@ -90,21 +89,23 @@ function buildCharts(sample) {
         color: response.otu_ids
       },
       mode: "markers",
+      type:"scatter",
     };
     var data1 = [trace1];
     var layout1 = {
       title: 'Sample bacterial population',
-      showlegend: true,
+      showlegend: false,
       autosize: true,
-      // colorway: colorlist
+      colorway: colorlist
     };
 
-    Plotly.react('bubble', data1, layout1);
+    Plotly.newPlot('bubble', data1, layout1);
     /*    ========Build a Pie Chart======== */
       var pie_values = chart_data[0].sample_values.slice(0,10);
       var pie_ids = chart_data[0].otu_ids.slice(0,10);
       var pie_labels = chart_data[0].otu_labels.slice(0,10);
       console.log(pie_values);
+
       var data = [{
         values:pie_values,
         labels: pie_ids,
@@ -115,11 +116,12 @@ function buildCharts(sample) {
       var layout = {
         title:"Top 10 bacterial species",
         showlegend:true,
-        // hoverdistance:10,
-        // colorway:colorlist
+        hoverdistance:10,
+        colorway:colorlist,
+        autoscale:true
       };
 
-      Plotly.react("pie", data, layout);
+      Plotly.newPlot("pie", data, layout);
     /*  ==============END PIE ============== */
   });
 }
