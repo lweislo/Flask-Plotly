@@ -1,0 +1,13 @@
+.jumbotron {
+  position: sticky;
+  padding: 20px;
+  margin: 0;
+  background: white;
+  background-image: url(../images/picasso-petri-dish.jpg);
+  background-size: auto;
+  height: 275px;}
+}
+
+.hero {
+  text-shadow: 4px 4px #f7f6d9;
+}

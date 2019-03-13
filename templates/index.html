@@ -6,46 +6,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Flask Plotlyjs Example</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/style.css">
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
 </head>
 
 <body>
-
   <div class="container">
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
-        <h1>Belly Button Biodiversity Dashboard</h1>
-        <p>Use the interactive charts below to explore the dataset</p>
+        <h1 class="hero">Belly Button Biodiversity Dashboard</h1>
+        <p class="hero">Use the interactive charts below to explore the dataset</p>
       </div>
     </div>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header" style="display: inline-block;">
+            <form class="form-inline my-2 my-lg-0">
+              <h5>
+            Select Sample</h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <select id="selDataset" onchange="optionChanged(this.value)"></select>
+          </form>
+          </div>
+        </div>
+      </nav>
     <div class="row">
-      <div class="col-md-2">
-        <div class="well">
+      <div class="col-md-4 col-sm-12">
+        <!-- <div class="well">
           <h5>SELECT Sample:</h5>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
+        </div> -->
+        <div class="card-group">
+
+          <div class="card">
+          <div class="card-header">Sample MetaData</div>
+          <div id="sample-metadata" class="card-body"></div>
+          </div>
         </div>
-        <div class="panel panel-primary">
+
+        <!-- <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Sample MetaData</h3>
           </div>
           <div id="sample-metadata" class="panel-body"></div>
         </div>
-      </div>
-      <div class="col-md-5">
-        <div id="pie"></div>
-      </div>
-      <div class="col-md-5">
-        <div id="gauge"></div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div id="bubble"></div>
-    </div>
-  </div>
+      </div> -->
 
+    </div>
+      <div class="col-md-4 col-sm-12">
+        <div id="pie" class="img-fluid"></div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div id="gauge" class="img-fluid"></div>
+      </div>
+  </div>
+<hr />
+    <div class="row">
+      <div class="col-md-12">
+        <div id="bubble" class="img-fluid" width="100%" height="100%"></div>
+      </div>
+    </div>
+  </div>
   <!-- <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
