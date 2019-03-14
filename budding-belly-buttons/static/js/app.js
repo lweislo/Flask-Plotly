@@ -39,7 +39,7 @@ function buildCharts(sample) {
       marker:{
         size: sample_values,
         color: otu_ids,
-        colorscale: colorlist
+        colorscale: "Portland"
       },
       mode: "markers"
     };
@@ -50,7 +50,6 @@ function buildCharts(sample) {
       yaxis:{title:"Bacterial count"},
       showlegend: false,
       autoscale: true,
-      colorscale: "Earth",
       margin: { t: 0 },
       hovermode: "closest",
     };
