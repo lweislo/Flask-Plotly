@@ -1,1 +1,1 @@
-FLASK_APP=budding-belly-buttons/app.py flask run
+FLASK_APP=app.py flask run
