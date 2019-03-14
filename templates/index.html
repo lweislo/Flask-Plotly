@@ -21,7 +21,7 @@
         <p class="hero">Use the interactive charts below to explore the dataset</p>
       </div>
     </div>
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-default navbar-light bg-light">
         <div class="container-fluid">
           <div class="navbar-header" style="display: inline-block;">
             <form class="form-inline my-2 my-lg-0">
@@ -33,11 +33,7 @@
         </div>
       </nav>
     <div class="row">
-      <div class="col-md-3 col-sm-12">
-        <!-- <div class="well">
-          <h5>SELECT Sample:</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
-        </div> -->
+      <div class="col-md-2 col-sm-12">
         <div class="card-group">
 
           <div class="card">
@@ -45,24 +41,25 @@
           <div id="sample-metadata" class="card-body"></div>
           </div>
         </div>
-
-        <!-- <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Sample MetaData</h3>
-          </div>
-          <div id="sample-metadata" class="panel-body"></div>
-        </div>
-      </div> -->
-
     </div>
       <div class="col-md-5 col-sm-12">
+        <div class="card-group">
+          <div class="card">
         <div id="pie" class="img-fluid"></div>
       </div>
-      <div class="col-md-4 col-sm-12">
+    </div>
+      </div>
+      <div class="col-md-5 col-sm-12">
+        <div class="card-group">
+          <div class="card">
         <div id="gauge" class="img-fluid"></div>
       </div>
+    </div>
+  </div>
+  </div>
   </div>
 <hr />
+  <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div id="bubble" class="img-fluid" width="100%" height="100%"></div>
@@ -73,7 +70,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="{{ url_for('static', filename='js/bonus.js') }}"></script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 

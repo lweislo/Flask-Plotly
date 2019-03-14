@@ -16,8 +16,6 @@ function buildGauge(wfreq) {
     level = 165
   }
 
-
-
 // Trig to calc meter point
 var degrees = 180 - level,
 	 radius = .5;
@@ -66,7 +64,7 @@ var layout = {
         color: '850000'
       }
     }],
-  title: '<b>Gauge</b> <br> Wash Frequency',
+  title: 'Weekly Washing Frequency',
   // height: 600,
   // width: 600,
   xaxis: {zeroline:false, showticklabels:false,
