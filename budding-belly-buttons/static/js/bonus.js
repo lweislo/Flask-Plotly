@@ -1,15 +1,20 @@
 function buildGauge(wfreq) {
-  var level = 135;
+  var level = 0;
   parseInt(wfreq);
-  if (wfreq === 0) {
+  Math.round(wfreq);
+  console.log(wfreq);
+  if (wfreq < 1) {
     level = 15; }
-  else if (wfreq < 3) {
+  else if (wfreq >= 1 && wfreq <= 2) {
     level = 45
   }
-  else if (wfreq < 7 && wfreq > 4) {
+  else if (wfreq >= 3 && wfreq <= 4) {
+    level = 75
+  }
+  else if (wfreq >= 5 && wfreq <= 6) {
     level = 105
   }
-  else if (wfreq < 9 && wfreq > 6) {
+  else if (wfreq >= 7 && wfreq <= 8) {
     level = 135
   }
   else {
@@ -41,7 +46,7 @@ var data = [{ type: 'scatter',
   { values: [50/6, 50/6, 50/6, 50/6, 50/6, 50/6, 50],
   rotation: 90,
   text: ['Cleanest', 'Cleaner', 'Clean', 'Average',
-			'Dirty', 'Filthy', 'YUCK!', ],
+			'Dirty', 'Filthy'],
   textinfo: 'text',
   textposition:'inside',
   marker: {colors:['rgba(14, 127, 0, .5)', 'rgba(110, 154, 22, .5)',
