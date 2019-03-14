@@ -1,1 +1,1 @@
-web: unicorn budding-belly-buttons.app:app
+web: gunicorn budding-belly-buttons.app:app --preload
