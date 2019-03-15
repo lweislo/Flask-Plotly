@@ -12,7 +12,7 @@ from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-
+from flask import send_from_directory
 
 #################################################
 # Database Setup
@@ -112,6 +112,9 @@ def wash_frequency(sample):
 
     print(wfreq)
     return jsonify(wfreq)
-
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 if __name__ == "__main__":
     app.run()
